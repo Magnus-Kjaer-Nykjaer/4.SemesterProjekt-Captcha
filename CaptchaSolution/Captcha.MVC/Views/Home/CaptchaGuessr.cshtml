@@ -1,0 +1,30 @@
+﻿@using Microsoft.EntityFrameworkCore.Design
+@model UploadFileModel
+@{
+  ViewData["Title"] = "Captcha Guessr";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Denne side er til at teste Captchaen.</p>
+
+<div class="guessr-container">
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="Upload" onchange="loadFile(event)" />
+    <br/><br/>
+    <img src="" alt="CaptchaImage" id="preview" /> 
+    <br/><br/>
+    <label>Skriv det rigtige svar</label> <br/>
+    <input class="userCaptchaInput" type="text" />
+    <input type="submit" value="Submit svar"/>
+  </form>
+</div>
+
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('preview');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src);
+    }
+  };
+</script>
