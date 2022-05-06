@@ -15,19 +15,19 @@ namespace Captcha.Api.Controllers
             _captchaRepository = captchaRepository;
         }
 
-        [HttpGet/*(Route.GetASelectedCaptcha)*/]
+        [HttpGet(Route.GetASelectedCaptcha)]
         public async Task GetASelectedCaptcha(string captchaName)
         {
             await _captchaRepository.GetASelectedCaptcha(captchaName);
         }
         
-        [HttpPut/*(Route.UpdateCaptchaName)*/]
+        [HttpPut(Route.UpdateCaptchaName)]
         public async Task UpdateCaptchaName(string captchaName, string change)
         {
             await _captchaRepository.UpdateCaptchaName(captchaName, change);
         }    
         
-        [HttpPost/*(Route.PostCaptcha)*/]
+        [HttpPost(Route.PostCaptcha)]
         public async Task PostCaptcha(string captchaName)
         {
             await _captchaRepository.PostCaptcha(captchaName);

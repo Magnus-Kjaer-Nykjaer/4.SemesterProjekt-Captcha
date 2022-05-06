@@ -4,9 +4,9 @@ namespace Captcha.Shared
 {
   public class Route
   {
-        public static string Api = "api/";
-        public string GetASelectedCaptcha = Api + "GetASelectedCaptcha";
-        public string UpdateCaptchaName = Api + "UpdateCaptchaName";
-        public string PostCaptcha = Api + "PostCaptcha";
+        public const string Api = "api/";
+        public const string GetASelectedCaptcha = Api + "GetASelectedCaptcha";
+        public const string UpdateCaptchaName = Api + "UpdateCaptchaName";
+        public const string PostCaptcha = Api + "PostCaptcha";
   }
 }
