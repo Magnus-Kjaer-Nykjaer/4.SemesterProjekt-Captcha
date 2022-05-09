@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Captcha.MVC.Models;
 
 namespace Captcha.MVC.Areas.Identity.Pages.Account
 {
@@ -20,6 +21,7 @@ namespace Captcha.MVC.Areas.Identity.Pages.Account
   {
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleCheck _roleCheck;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
 
@@ -27,12 +29,13 @@ namespace Captcha.MVC.Areas.Identity.Pages.Account
         UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender, RoleCheck roleCheck)
     {
       _userManager = userManager;
       _signInManager = signInManager;
       _logger = logger;
       _emailSender = emailSender;
+      _roleCheck = roleCheck;
     }
 
     [BindProperty]
@@ -78,6 +81,11 @@ namespace Captcha.MVC.Areas.Identity.Pages.Account
         if (result.Succeeded)
         {
           _logger.LogInformation("User created a new account with password.");
+
+          const string roleName = "Standard";
+
+          if (await _roleCheck.CheckRole(roleName))
+            await _userManager.AddToRoleAsync(user, roleName);
 
           var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
           code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
