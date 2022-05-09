@@ -1,8 +1,5 @@
-﻿using Captcha.MVC.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Captcha.MVC.Controllers
 {

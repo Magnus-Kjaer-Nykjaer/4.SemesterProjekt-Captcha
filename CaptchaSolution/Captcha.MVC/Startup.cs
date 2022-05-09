@@ -45,7 +45,7 @@ namespace Captcha.MVC
         .AddDefaultUI()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
-      
+
       services.AddControllersWithViews();
 
       services.AddSingleton<ICaptchaApi>(RestService.For<ICaptchaApi>("http://localhost:48251"));

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Captcha.Shared;
+﻿using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
+using System.Threading.Tasks;
 
 namespace Captcha.MVC.Service
 {
