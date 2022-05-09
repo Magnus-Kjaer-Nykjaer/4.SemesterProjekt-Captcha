@@ -28,8 +28,12 @@ namespace Captcha.MVC
               Configuration.GetConnectionString("DefaultConnection")));
       services.AddDatabaseDeveloperPageExceptionFilter();
 
-      services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-          .AddEntityFrameworkStores<ApplicationDbContext>();
+      services.AddIdentity<IdentityUser, IdentityRole>(options =>
+          options.SignIn.RequireConfirmedAccount = true)
+        .AddDefaultUI()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+      
       services.AddControllersWithViews();
 
       services.AddSingleton<ICaptchaApi>(RestService.For<ICaptchaApi>("http://localhost:48251"));

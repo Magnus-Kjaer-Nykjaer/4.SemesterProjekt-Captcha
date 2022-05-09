@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Captcha.MVC.Models
 {
+  [Authorize(Policy = "Admin")]
   public class UploadFileModel : PageModel
   {
     private IWebHostEnvironment _environment;
