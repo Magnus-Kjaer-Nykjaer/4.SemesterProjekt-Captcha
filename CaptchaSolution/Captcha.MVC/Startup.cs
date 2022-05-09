@@ -1,4 +1,5 @@
 using Captcha.MVC.Data;
+using Captcha.MVC.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Refit;
 
 namespace Captcha.MVC
 {
@@ -29,6 +31,8 @@ namespace Captcha.MVC
       services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
           .AddEntityFrameworkStores<ApplicationDbContext>();
       services.AddControllersWithViews();
+
+      services.AddSingleton<ICaptchaApi>(RestService.For<ICaptchaApi>("http://localhost:48251"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
