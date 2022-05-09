@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 namespace Captcha.MVC.Models
 {
   [Authorize(Policy = "Admin")]
-  public class UploadFileModel : PageModel
+  public class CaptchaLabelModel : PageModel
   {
     private IWebHostEnvironment _environment;
-    public UploadFileModel(IWebHostEnvironment environment)
+    public CaptchaLabelModel(IWebHostEnvironment environment)
     {
       _environment = environment;
     }

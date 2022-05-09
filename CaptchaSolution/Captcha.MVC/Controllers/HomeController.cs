@@ -19,7 +19,7 @@ namespace Captcha.MVC.Controllers
       return View();
     }
 
-    public IActionResult CaptchaGuessr()
+    public IActionResult Privacy()
     {
       return View();
     }
