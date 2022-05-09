@@ -1,5 +1,3 @@
-using System;
-
 namespace Captcha.MVC.Models
 {
   public class ErrorViewModel
