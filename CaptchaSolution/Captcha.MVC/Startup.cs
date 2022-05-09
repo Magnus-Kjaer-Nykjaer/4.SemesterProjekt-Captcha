@@ -36,7 +36,7 @@ namespace Captcha.MVC
       });
 
       services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseSqlServer(
+          options.UseSqlite(
               Configuration.GetConnectionString("DefaultConnection")));
       services.AddDatabaseDeveloperPageExceptionFilter();
 
