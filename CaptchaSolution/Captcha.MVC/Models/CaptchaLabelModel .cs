@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Captcha.MVC.Models
 {
-  [Authorize(Policy = "Admin")]
+  [Authorize(Roles = "Standard, Admin")]
   public class CaptchaLabelModel : PageModel
   {
     private IWebHostEnvironment _environment;

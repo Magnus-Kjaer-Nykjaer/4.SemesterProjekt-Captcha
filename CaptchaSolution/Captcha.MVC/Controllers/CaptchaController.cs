@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Captcha.MVC.Controllers
 {
-  [Authorize(Roles = "Admin, Standard")]
+  [Authorize(Roles = "Standard, Admin")]
   public class CaptchaController : Controller
   {
-    [Authorize(Roles = "Admin")]
     public IActionResult CaptchaLabeler()
     {
       return View();
