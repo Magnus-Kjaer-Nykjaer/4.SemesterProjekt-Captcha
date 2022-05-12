@@ -1,6 +1,29 @@
-﻿@{
+﻿@model CaptchaLabelModel 
+@{
     ViewData["Title"] = "Admin panel";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Denne side er til at se admin information.</p>
+<p>Label og upload filer til data sættet</p>
+
+<div class="guessr-container">
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="Upload" onchange="loadFile(event)" />
+    <br/><br/>
+    <img src="" alt="CaptchaImage" id="preview" /> 
+    <br/><br/>
+    <label>Label billedet</label> <br/>
+    <input class="userCaptchaInput" type="text" />
+    <input type="submit" value="Submit biled"/>
+  </form>
+</div>
+
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('preview');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src);
+    }
+  };
+</script>
