@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Captcha.Api", "Captcha.Api\Captcha.Api.csproj", "{11CAE0C4-BDD0-49D8-A1B3-771446C224D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Api", "Captcha.Api\Captcha.Api.csproj", "{11CAE0C4-BDD0-49D8-A1B3-771446C224D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Captcha.Shared", "Captcha.Shared\Captcha.Shared.csproj", "{1F67999E-EAB6-437C-BEE2-24F583CCEF6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Shared", "Captcha.Shared\Captcha.Shared.csproj", "{1F67999E-EAB6-437C-BEE2-24F583CCEF6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Captcha.MVC", "Captcha.MVC\Captcha.MVC.csproj", "{D0C702CD-3230-429C-BBAB-0FBF565EC539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.MVC", "Captcha.MVC\Captcha.MVC.csproj", "{D0C702CD-3230-429C-BBAB-0FBF565EC539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Captcha.AI", "Captcha.AI\Captcha.AI.csproj", "{91880B50-7916-4E3C-9986-D5D536B1E583}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.MLImageCompare_Api", "Captcha.MLImageCompare_Api\Captcha.MLImageCompare_Api.csproj", "{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{D0C702CD-3230-429C-BBAB-0FBF565EC539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0C702CD-3230-429C-BBAB-0FBF565EC539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0C702CD-3230-429C-BBAB-0FBF565EC539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91880B50-7916-4E3C-9986-D5D536B1E583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91880B50-7916-4E3C-9986-D5D536B1E583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91880B50-7916-4E3C-9986-D5D536B1E583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91880B50-7916-4E3C-9986-D5D536B1E583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
