@@ -1,4 +1,4 @@
-﻿@model AdminPanelModel
+﻿@model Captcha.Shared.CaptchaLabelDto
 @{
   ViewData["Title"] = "Admin panel";
 }
@@ -6,17 +6,18 @@
 
 <p>Label og upload filer til data sættet</p>
 
-<div class="guessr-container">
+<div>
   <form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="Upload" onchange="loadFile(event)" />
+    <input type="file" asp-for="File" onchange="loadFile(event)" />
     <br /><br />
     <img src="" alt="CaptchaImage" id="preview" />
     <br /><br />
     <label>Label billedet</label> <br />
-    <input class="userCaptchaInput" type="text" />
+    <input id="userCaptchaInput" type="text" asp-for="Name" />
     <input type="submit" value="Submit biled" />
   </form>
 </div>
+}
 
 <script>
   var loadFile = function(event) {

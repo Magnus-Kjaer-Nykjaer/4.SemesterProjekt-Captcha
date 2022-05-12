@@ -14,6 +14,6 @@ namespace Captcha.MVC.Service
     Task<IActionResult> UpdateCaptchaName(string captchaName, string change);
 
     [Post(Route.PostCaptcha)]
-    Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes);
+    Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel);
   }
 }

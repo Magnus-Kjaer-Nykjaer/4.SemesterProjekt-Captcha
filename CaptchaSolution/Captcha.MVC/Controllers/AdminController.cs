@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Captcha.MVC.Models;
+using Captcha.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Captcha.MVC.Controllers
@@ -6,8 +8,14 @@ namespace Captcha.MVC.Controllers
   [Authorize(Roles = "Admin")]
   public class AdminController : Controller
   {
-    public IActionResult AdminPanel()
+    public IActionResult Index()
     {
+      return View();
+    } 
+
+    public IActionResult CreateLabel(CaptchaLabelDto label)
+    {
+
       return View();
     }
 

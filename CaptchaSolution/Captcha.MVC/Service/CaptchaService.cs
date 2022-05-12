@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Captcha.MVC.Models;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +9,17 @@ namespace Captcha.MVC.Service
   {
     public async Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
     {
-      return await GetASelectedCaptcha(captchaName);
+      return null;
     }
 
     public async Task<IActionResult> UpdateCaptchaName(string captchaName, string change)
     {
-      return await UpdateCaptchaName(captchaName, change);
+      return null;
     }
 
-    public async Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes)
+    public async Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel)
     {
-      return await PostCaptcha(captchaName, fileBytes);
+      return null;
     }
   }
 }
