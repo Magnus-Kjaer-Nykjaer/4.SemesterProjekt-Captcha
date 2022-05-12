@@ -1,29 +1,24 @@
 ﻿using System.Threading.Tasks;
+using Captcha.Shared;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Captcha.MVC.Service
 {
-  public class CaptchaService
+  public class CaptchaService : ICaptchaService
   {
-    public readonly ICaptchaApi _captchaApi;
-
-    public CaptchaService(ICaptchaApi captchaApi)
+    public async Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
     {
-      _captchaApi = captchaApi;
+      return await GetASelectedCaptcha(captchaName);
     }
 
-    public async Task GetASelectedCaptcha(string captchaName)
+    public async Task<IActionResult> UpdateCaptchaName(string captchaName, string change)
     {
-      await _captchaApi.GetASelectedCaptcha(captchaName);
+      return await UpdateCaptchaName(captchaName, change);
     }
 
-    public async Task UpdateCaptchaName(string captchaName, string change)
+    public async Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes)
     {
-      await _captchaApi.UpdateCaptchaName(captchaName, change);
-    }
-
-    public async Task PostCaptcha(string captchaName)
-    {
-      await _captchaApi.PostCaptcha(captchaName);
+      return await PostCaptcha(captchaName, fileBytes);
     }
   }
 }

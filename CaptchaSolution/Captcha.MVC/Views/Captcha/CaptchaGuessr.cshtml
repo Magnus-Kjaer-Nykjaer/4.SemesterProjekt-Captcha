@@ -1,4 +1,4 @@
-﻿@model CaptchaLabelModel 
+﻿@model CaptchaGuessrModel
 @{
   ViewData["Title"] = "Captcha Guessr";
 }
@@ -9,10 +9,10 @@
 <div class="guessr-container">
   <form method="post" enctype="multipart/form-data">
     <input type="file" asp-for="Upload" onchange="loadFile(event)" />
-    <br/><br/>
-    <img src="" alt="CaptchaImage" id="preview" /> 
-    <br/><br/>
-    <input type="submit" value="Submit gættet"/>
+    <br /><br />
+    <img src="" alt="CaptchaImage" id="preview" />
+    <br /><br />
+    <input type="submit" value="Submit gættet" />
   </form>
 </div>
 

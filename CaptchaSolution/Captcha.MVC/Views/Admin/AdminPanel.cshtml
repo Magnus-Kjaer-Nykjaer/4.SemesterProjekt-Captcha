@@ -1,6 +1,6 @@
-﻿@model CaptchaLabelModel 
+﻿@model AdminPanelModel
 @{
-    ViewData["Title"] = "Admin panel";
+  ViewData["Title"] = "Admin panel";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -9,12 +9,12 @@
 <div class="guessr-container">
   <form method="post" enctype="multipart/form-data">
     <input type="file" asp-for="Upload" onchange="loadFile(event)" />
-    <br/><br/>
-    <img src="" alt="CaptchaImage" id="preview" /> 
-    <br/><br/>
-    <label>Label billedet</label> <br/>
+    <br /><br />
+    <img src="" alt="CaptchaImage" id="preview" />
+    <br /><br />
+    <label>Label billedet</label> <br />
     <input class="userCaptchaInput" type="text" />
-    <input type="submit" value="Submit biled"/>
+    <input type="submit" value="Submit biled" />
   </form>
 </div>
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Captcha.Api.Repositories
 {
-  public class CaptchaRepository
+  public class CaptchaRepository : ICaptchaRepository
   {
     public Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
     {
@@ -25,17 +25,17 @@ namespace Captcha.Api.Repositories
       session.SaveChanges();
       return Task.CompletedTask;
     }
-
-    public Task PostCaptcha(string captchaName) // Opret medarbejder 
+    public Task PostCaptcha(string captchaName, byte[] fileBytes) // Opret medarbejder 
     {
       using var documentStore = CreateStore();
       using var session = documentStore.OpenSession();
 
-      var newEmployee = new CaptchaModel
+      var newCaptcha = new CaptchaModel
       {
-        Name = captchaName
+        Name = captchaName,
+        FileBytes = fileBytes
       };
-      session.Store(newEmployee);
+      session.Store(newCaptcha);
       session.SaveChanges();
       return Task.CompletedTask;
     }

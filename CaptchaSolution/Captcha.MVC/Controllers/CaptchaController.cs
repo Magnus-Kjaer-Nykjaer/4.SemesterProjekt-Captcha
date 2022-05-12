@@ -6,7 +6,7 @@ namespace Captcha.MVC.Controllers
   [Authorize(Roles = "Standard, Admin")]
   public class CaptchaController : Controller
   {
-    public IActionResult CaptchaLabeler()
+    public IActionResult CaptchaGuessr()
     {
       return View();
     }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Captcha.MVC.Service
 {
-  public interface ICaptchaApi
+  public interface ICaptchaService
   {
     [Get(Route.GetASelectedCaptcha)]
     Task<CaptchaModel> GetASelectedCaptcha(string captchaName);
@@ -14,6 +14,6 @@ namespace Captcha.MVC.Service
     Task<IActionResult> UpdateCaptchaName(string captchaName, string change);
 
     [Post(Route.PostCaptcha)]
-    Task<IActionResult> PostCaptcha(string captchaName);
+    Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes);
   }
 }
