@@ -8,6 +8,6 @@ namespace Captcha.Api.Repositories
     
     public Task<CaptchaModel> GetASelectedCaptcha(string captchaName);
     public Task UpdateCaptchaName(string captchaName, string change);
-    public Task PostCaptcha(string captchaName);
+    public Task PostCaptcha(string captchaName, byte[] fileBytes);
   }
 }

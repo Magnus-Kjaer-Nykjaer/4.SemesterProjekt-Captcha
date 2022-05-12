@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace Captcha.MVC.Models
 {
-  [Authorize(Roles = "Standard, Admin")]
-  public class CaptchaLabelModel : PageModel
+  public class CaptchaGuessrModel : PageModel
   {
     private IWebHostEnvironment _environment;
-    public CaptchaLabelModel(IWebHostEnvironment environment)
+    public CaptchaGuessrModel(IWebHostEnvironment environment)
     {
       _environment = environment;
     }
@@ -21,10 +20,8 @@ namespace Captcha.MVC.Models
     public async Task OnPostAsync()
     {
       var file = Path.Combine(_environment.ContentRootPath, "uploads", Upload.FileName);
-      using (var fileStream = new FileStream(file, FileMode.Create))
-      {
-        await Upload.CopyToAsync(fileStream);
-      }
+      var fileStream = new FileStream(file, FileMode.Create);
+      await Upload.CopyToAsync(fileStream);
     }
   }
 }

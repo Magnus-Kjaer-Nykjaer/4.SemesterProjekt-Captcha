@@ -52,7 +52,7 @@ namespace Captcha.MVC
 
 
 
-      services.AddSingleton<ICaptchaApi>(RestService.For<ICaptchaApi>("http://localhost:48251"));
+      services.AddSingleton<ICaptchaService>(RestService.For<ICaptchaService>("http://localhost:48251"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
