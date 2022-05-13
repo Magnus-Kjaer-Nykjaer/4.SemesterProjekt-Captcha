@@ -5,7 +5,9 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-public partial class MLImage
+using System.Threading.Tasks;
+
+public class MLImage : IMLImage
 {
     /// <summary>
     /// model input class for MLImage.
@@ -54,7 +56,7 @@ public partial class MLImage
     /// </summary>
     /// <param name="input">model input.</param>
     /// <returns><seealso cref=" ModelOutput"/></returns>
-    public static ModelOutput Predict(ModelInput input)
+    public async Task<ModelOutput> Predict(ModelInput input)
     {
         var predEngine = PredictEngine.Value;
         return predEngine.Predict(input);
@@ -66,4 +68,9 @@ public partial class MLImage
         ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var _);
         return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
     }
+}
+
+public interface IMLImage
+{
+  Task<MLImage.ModelOutput> Predict(MLImage.ModelInput input);
 }
