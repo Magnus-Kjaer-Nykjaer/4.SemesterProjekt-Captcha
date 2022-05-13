@@ -2,6 +2,7 @@
 using Captcha.MVC.Models;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Refit;
 
 namespace Captcha.MVC.Service
 {
@@ -19,7 +20,9 @@ namespace Captcha.MVC.Service
 
     public async Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel)
     {
-      return null;
+      var gitHubApi = RestService.For<ICaptchaService>("http://localhost:48251");
+      var octocat = await gitHubApi.PostCaptcha(captchaLabel);
+      return octocat;
     }
   }
 }

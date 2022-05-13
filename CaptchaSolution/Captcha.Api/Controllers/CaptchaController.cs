@@ -2,11 +2,10 @@
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-
 namespace Captcha.Api.Controllers
 {
   [ApiController]
-  public class CaptchaController : Controller
+  public class CaptchaController : ControllerBase
   {
     private readonly ICaptchaRepository _captchaRepository;
 
@@ -29,10 +28,6 @@ namespace Captcha.Api.Controllers
     }
 
     [HttpPost(Route.PostCaptcha)]
-    public async Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes)
-    {
-      await _captchaRepository.PostCaptcha(captchaName, fileBytes);
-      return Ok();
-    }
+    public async Task PostCaptcha(string captchaName, byte[] fileBytes) => await _captchaRepository.PostCaptcha(captchaName, fileBytes);
   }
 }

@@ -13,7 +13,7 @@ namespace Captcha.MVC.Service
     [Put(Route.UpdateCaptchaName)]
     Task<IActionResult> UpdateCaptchaName(string captchaName, string change);
 
-    [Post(Route.PostCaptcha)]
+    [Post(Route.PostCaptcha + "/{captchaLabel}")]
     Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel);
   }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Captcha.MVC.Service;
+﻿using Captcha.MVC.Service;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Captcha.MVC.Controllers
 {
@@ -20,23 +19,28 @@ namespace Captcha.MVC.Controllers
       _logger = logger;
     }
 
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Index(CaptchaLabelDto label)
+    public async Task<ActionResult> Create(CaptchaLabelDto label)
     {
       try
       {
         if (ModelState.IsValid)
         {
           await _captchaService.PostCaptcha(label);
-          return RedirectToAction(nameof(Index));
+          return RedirectToAction("Index" , "Home");
         }
       }
       catch
       {
         _logger.LogError("Der gik et eller andet galt under oprettelsen");
       }
-      return RedirectToAction(nameof(Index));
+      return RedirectToAction("Index", "Home");
     }
   }
 }
