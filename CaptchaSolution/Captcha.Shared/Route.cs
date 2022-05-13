@@ -8,6 +8,6 @@
     public const string PostCaptcha = Api + "PostCaptcha";
 
     public const string MLImageCompare_Api = "/MLImageCompare_Api/";
-    public const string Predict = Api + "predict";
+    public const string Predict = Api + "Predict";
   }
 }

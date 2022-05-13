@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Description = "Docs for my API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MLAPI", Description = "ML image compare API", Version = "v1" });
 });
 var app = builder.Build();
 
@@ -25,7 +25,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MLAPI V1");
 });
 
 // Define prediction route & handler
