@@ -60,7 +60,6 @@ public class MLImage : IMLImage
   /// <returns><seealso cref=" ModelOutput"/></returns>
   public async Task<ModelOutputDTO> Predict(ModelInputDTO input)
   {
-    //FIX MODELS
     var predEngine = PredictEngine.Value;
     return ConvertOutputToDto(predEngine.Predict(ConvertInputFromDto(input)));
   }
