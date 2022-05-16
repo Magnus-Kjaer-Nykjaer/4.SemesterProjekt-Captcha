@@ -10,19 +10,19 @@ namespace Captcha.MLImageCompare_Api.Controllers
 {
 
   [ApiController]
-  public class MlCompareController : Controller
+  [Route(Route.Predict)]
+  public class MlCompareController : ControllerBase
   {
-    public readonly IMLImage _mLImage;
+    private readonly IMLImage _mLImage;
 
     public MlCompareController(IMLImage mLImage)
     {
       _mLImage = mLImage;
     }
 
-    [HttpPost(Route.Predict)]
+    [HttpPost]
     public async Task<ModelOutputDTO> PredictImage([FromForm] ModelInputDTO inputDto)
     {
-
       return await _mLImage.Predict(inputDto);
     }
   }

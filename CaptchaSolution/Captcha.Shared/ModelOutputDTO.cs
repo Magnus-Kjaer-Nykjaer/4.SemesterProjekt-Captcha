@@ -20,6 +20,6 @@ namespace Captcha.Shared
 
     [Required]
     [Display(Name = "Score")]
-    public float[] Score { get; set; }
+    public float Score { get; set; }
   }
 }
