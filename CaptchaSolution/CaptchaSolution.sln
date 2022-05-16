@@ -9,9 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Shared", "Captcha.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.MVC", "Captcha.MVC\Captcha.MVC.csproj", "{D0C702CD-3230-429C-BBAB-0FBF565EC539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Captcha.AI", "Captcha.AI\Captcha.AI.csproj", "{91880B50-7916-4E3C-9986-D5D536B1E583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.AI", "Captcha.AI\Captcha.AI.csproj", "{91880B50-7916-4E3C-9986-D5D536B1E583}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.MLImageCompare_Api", "Captcha.MLImageCompare_Api\Captcha.MLImageCompare_Api.csproj", "{59F53BE6-DE5C-48A0-8667-B04B8BCD3967}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1F67999E-EAB6-437C-BEE2-24F583CCEF6C} = {1F67999E-EAB6-437C-BEE2-24F583CCEF6C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

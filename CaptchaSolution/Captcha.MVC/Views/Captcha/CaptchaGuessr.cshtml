@@ -1,4 +1,4 @@
-﻿@model CaptchaGuessrModel
+﻿@model Captcha.Shared.ModelInputDTO
 @{
   ViewData["Title"] = "Captcha Guessr";
 }
@@ -8,7 +8,7 @@
 
 <div class="guessr-container">
   <form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="Upload" onchange="loadFile(event)" />
+    <input type="file" asp-for="File" onchange="loadFile(event)" accept="image/png, image/jpeg, image/jpg" />
     <br /><br />
     <img src="" alt="CaptchaImage" id="preview" />
     <br /><br />
