@@ -34,7 +34,7 @@ namespace Captcha.MVC.Controllers
     {
       try
       {
-       var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
+        var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
         return View("CaptchaGuessrResult", result);
       }
@@ -44,6 +44,6 @@ namespace Captcha.MVC.Controllers
       }
       return RedirectToAction("Index", "Home");
     }
-    
+
   }
 }
