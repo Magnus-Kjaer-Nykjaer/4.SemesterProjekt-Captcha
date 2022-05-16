@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using Captcha.MLImageCompare_Api;
+using Captcha.MLImageCompare_Api.MLInterfaces;
 
 // Configure app
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "MLAPI", Description = "ML image compare API", Version = "v1" });
 });
+
+builder.Services.AddControllers();
+builder.Services.AddTransient<IMLImage, MLImage>();
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -28,14 +33,4 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "MLAPI V1");
 });
 
-// Define prediction route & handler
-app.MapPost("/predict",
-    async (PredictionEnginePool<MLImage.ModelInput, MLImage.ModelOutput> predictionEnginePool, string imagePath) =>
-    {
-        var input = new MLImage.ModelInput()
-        {
-            ImageSource = File.ReadAllBytes(imagePath),
-        };
-
-        return await Task.FromResult(predictionEnginePool.Predict(input));
-    });
+await app.RunAsync();
