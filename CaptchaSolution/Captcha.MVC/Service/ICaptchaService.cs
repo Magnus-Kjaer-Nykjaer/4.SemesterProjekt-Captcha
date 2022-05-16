@@ -13,7 +13,8 @@ namespace Captcha.MVC.Service
     [Put(Route.UpdateCaptchaName)]
     Task<IActionResult> UpdateCaptchaName(string captchaName, string change);
 
-    [Post(Route.PostCaptcha + "/{captchaLabel}")]
-    Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel);
+    [Multipart]
+    [Post(Route.PostCaptcha)]
+    Task PostCaptcha(string name, [AliasAs(nameof(CaptchaLabelDto.File))] StreamPart file);
   }
 }
