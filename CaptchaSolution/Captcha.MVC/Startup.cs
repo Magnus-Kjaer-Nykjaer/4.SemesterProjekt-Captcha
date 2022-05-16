@@ -1,3 +1,4 @@
+using System;
 using Captcha.MVC.Data;
 using Captcha.MVC.Models;
 using Captcha.MVC.Service;
@@ -49,8 +50,6 @@ namespace Captcha.MVC
         .AddDefaultTokenProviders();
 
       services.AddControllersWithViews();
-
-
 
       services.AddSingleton<ICaptchaService>(RestService.For<ICaptchaService>("http://localhost:48251"));
     }

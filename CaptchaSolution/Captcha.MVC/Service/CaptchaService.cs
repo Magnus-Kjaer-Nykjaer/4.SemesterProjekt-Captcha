@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Captcha.MVC.Models;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Refit;
 
 namespace Captcha.MVC.Service
 {
@@ -8,17 +10,19 @@ namespace Captcha.MVC.Service
   {
     public async Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
     {
-      return await GetASelectedCaptcha(captchaName);
+      return null;
     }
 
     public async Task<IActionResult> UpdateCaptchaName(string captchaName, string change)
     {
-      return await UpdateCaptchaName(captchaName, change);
+      return null;
     }
 
-    public async Task<IActionResult> PostCaptcha(string captchaName, byte[] fileBytes)
+    public async Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel)
     {
-      return await PostCaptcha(captchaName, fileBytes);
+      var gitHubApi = RestService.For<ICaptchaService>("http://localhost:5001");
+      var captcha = await gitHubApi.PostCaptcha(captchaLabel);
+      return captcha;
     }
   }
 }

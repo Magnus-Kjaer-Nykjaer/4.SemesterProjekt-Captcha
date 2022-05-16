@@ -25,15 +25,15 @@ namespace Captcha.Api.Repositories
       session.SaveChanges();
       return Task.CompletedTask;
     }
-    public Task PostCaptcha(string captchaName, byte[] fileBytes) // Opret medarbejder 
+    public Task PostCaptcha(CaptchaLabelDto captchaLabel) // Opret medarbejder 
     {
       using var documentStore = CreateStore();
       using var session = documentStore.OpenSession();
 
       var newCaptcha = new CaptchaModel
       {
-        Name = captchaName,
-        FileBytes = fileBytes
+        Name = captchaLabel.Name,
+        FileBytes = captchaLabel.File
       };
       session.Store(newCaptcha);
       session.SaveChanges();
