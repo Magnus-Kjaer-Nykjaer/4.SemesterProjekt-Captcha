@@ -8,5 +8,6 @@ namespace Captcha.Api.Repositories
     Task<CaptchaLabelDto> GetASelectedCaptcha(string captchaName);
     Task UpdateCaptchaName(string captchaName, string change);
     Task PostCaptcha(CaptchaLabelDto captchaLabel);
+    Task PostCaptchaResult(ModelOutputDTO captchaResult);
   }
 }
