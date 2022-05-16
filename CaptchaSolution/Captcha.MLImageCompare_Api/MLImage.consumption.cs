@@ -65,15 +65,6 @@ public class MLImage : IMLImage
     var predEngine = PredictEngine.Value;
     return ConvertOutputToDto(predEngine.Predict(await ConvertInputFromDto(input)));
   }
-  public ModelOutputDTO ConvertOutputToDto(ModelOutput modelOutput)
-  {
-    var output = new ModelOutputDTO();
-
-    output.PredictedLabel = modelOutput.PredictedLabel;
-    output.Label = modelOutput.Label;
-    output.Score = modelOutput.Score;
-    return output;
-  }
 
   public async Task<ModelInput> ConvertInputFromDto(ModelInputDTO dto)
   {
@@ -87,6 +78,27 @@ public class MLImage : IMLImage
     return modelInput;
   }
 
+  public ModelOutputDTO ConvertOutputToDto(ModelOutput modelOutput)
+  {
+    var output = new ModelOutputDTO();
+
+    output.PredictedLabel = modelOutput.PredictedLabel;
+    output.Label = modelOutput.Label;
+
+    var score = modelOutput.Score;
+    float chosenScore = score[0];
+    foreach (var s in score)
+    {
+      if (s < 1 && s >= chosenScore)
+      {
+        chosenScore = s;
+      }
+    }
+
+    output.Score = chosenScore;
+    return output;
+  }
+  
   private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
   {
     var mlContext = new MLContext();

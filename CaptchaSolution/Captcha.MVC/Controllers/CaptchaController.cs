@@ -1,14 +1,11 @@
-﻿using Captcha.MVC.Service;
+﻿using System;
+using System.Net.Http;
+using Captcha.MVC.Service;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Refit;
-using static System.Net.Mime.MediaTypeNames;
+using System.Threading.Tasks;
 
 namespace Captcha.MVC.Controllers
 {
@@ -34,16 +31,18 @@ namespace Captcha.MVC.Controllers
     {
       try
       {
-       var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
+        var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
+
+        result.Score *= 100;
         return View("CaptchaGuessrResult", result);
       }
-      catch (ApiException e)
+      catch (HttpRequestException e)
       {
         _logger.LogError("{e}", e);
       }
       return RedirectToAction("Index", "Home");
     }
-    
+
   }
 }

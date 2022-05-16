@@ -33,4 +33,11 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "MLAPI V1");
 });
 
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+  endpoints.MapControllers();
+});
+
 await app.RunAsync();

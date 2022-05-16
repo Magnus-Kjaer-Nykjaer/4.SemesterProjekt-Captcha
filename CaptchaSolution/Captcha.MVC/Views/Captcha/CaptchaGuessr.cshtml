@@ -8,10 +8,12 @@
 
 <div class="guessr-container">
   <form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="File" onchange="loadFile(event)" accept="image/png, image/jpeg, image/jpg" />
-    <br /><br />
-    <img src="" alt="CaptchaImage" id="preview" />
-    <br /><br />
+    <input type="file" asp-for="File" onchange="loadFile(event)" accept="image/png, image/jpeg, image/jpg"/>
+    <input type="text" asp-for="Name"/>
+    <br/><br/>
+    <img src="" alt="CaptchaImage" id="preview"/>
+    <br/><br/>
+
     <input type="submit" value="Submit gæt" />
   </form>
 </div>

@@ -52,7 +52,7 @@ namespace Captcha.MVC
       services.AddControllersWithViews();
 
       services.AddSingleton<ICaptchaService>(RestService.For<ICaptchaService>("http://localhost:48251"));
-      services.AddSingleton<IAIService>(RestService.For<IAIService>("http://localhost:58461"));
+      services.AddSingleton<IAIService>(RestService.For<IAIService>("https://localhost:58461"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
