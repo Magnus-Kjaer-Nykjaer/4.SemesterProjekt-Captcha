@@ -8,7 +8,7 @@
 <p>Label og upload filer til data sættet</p>
 
 <div>
-  <form asp-action="Create">
+  <form method="post" enctype="multipart/form-data">
     <input type="file" asp-for="File" accept="image/png, image/jpeg, image/jpg"/>
 
     <br/><br/>

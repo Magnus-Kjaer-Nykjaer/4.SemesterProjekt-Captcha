@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Refit;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
 namespace Captcha.Shared
@@ -13,6 +12,6 @@ namespace Captcha.Shared
 
     [Required]
     [Display(Name = "File")]
-    public byte[] File { get; set; }
+    public IFormFile File { get; set; }
   }
 }

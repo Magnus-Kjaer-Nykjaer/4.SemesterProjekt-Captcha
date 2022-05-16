@@ -1,14 +1,14 @@
 ﻿using System;
 using Captcha.MVC.Service;
 using Captcha.Shared;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Refit;
 
 namespace Captcha.MVC.Controllers
 {
-  [Authorize(Roles = "Admin")]
+  [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
   public class AdminController : Controller
   {
     private readonly ILogger<AdminController> _logger;
@@ -27,15 +27,15 @@ namespace Captcha.MVC.Controllers
 
 
     [HttpPost]
-    public async Task<ActionResult> Create(CaptchaLabelDto label)
+    public async Task<ActionResult> Create([FromForm]CaptchaLabelDto label)
     {
       try
       {
-        await _captchaService.PostCaptcha(label);
+        await _captchaService.PostCaptcha(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
         return RedirectToAction("Index" , "Home");
       }
-      catch(Exception e)
+      catch(ApiException e)
       {
         _logger.LogError("{e}", e);
       }

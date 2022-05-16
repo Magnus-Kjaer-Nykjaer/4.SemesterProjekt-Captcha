@@ -2,7 +2,6 @@
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Refit;
 
 namespace Captcha.Api.Controllers
 {
@@ -17,7 +16,7 @@ namespace Captcha.Api.Controllers
     }
 
     [HttpGet(Route.GetASelectedCaptcha)]
-    public async Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
+    public async Task<CaptchaLabelDto> GetASelectedCaptcha(string captchaName)
     {
       return await _captchaRepository.GetASelectedCaptcha(captchaName);
     }
@@ -30,6 +29,7 @@ namespace Captcha.Api.Controllers
     }
 
     [HttpPost(Route.PostCaptcha)]
-    public async Task PostCaptcha(CaptchaLabelDto captchaLabel) => await _captchaRepository.PostCaptcha(captchaLabel);
+    public async Task PostCaptcha([FromForm] CaptchaLabelDto captchaLabel) => 
+      await _captchaRepository.PostCaptcha(captchaLabel);
   }
 }

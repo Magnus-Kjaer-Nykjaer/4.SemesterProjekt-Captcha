@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Captcha.Shared;
 using Raven.Client.Documents;
 using System.Linq;
@@ -18,11 +19,11 @@ namespace Captcha.Api.Repositories
       _logger = logger;
     }
 
-    public Task<CaptchaModel> GetASelectedCaptcha(string captchaName)
+    public Task<CaptchaLabelDto> GetASelectedCaptcha(string captchaName)
     {
       using var documentStore = CreateStore();
       using var session = documentStore.OpenSession();
-      var captcha = session.Load<CaptchaModel>(captchaName);
+      var captcha = session.Load<CaptchaLabelDto>(captchaName);
       return Task.FromResult(captcha);
     }
 
@@ -30,8 +31,8 @@ namespace Captcha.Api.Repositories
     {
       using var documentStore = CreateStore();
       using var session = documentStore.OpenAsyncSession();
-      var captcha = await session.LoadAsync<CaptchaModel>(captchaName);
-      var emp = session.Query<CaptchaModel>().Where(z => z.Name == captchaName).ToList();
+      var captcha = await session.LoadAsync<CaptchaLabelDto>(captchaName);
+      var emp = session.Query<CaptchaLabelDto>().Where(z => z.Name == captchaName).ToList();
       captcha.Name = change;
       await session.SaveChangesAsync();
       await Task.CompletedTask;
@@ -43,10 +44,13 @@ namespace Captcha.Api.Repositories
         var documentStore = CreateStore();
         var session = documentStore.OpenAsyncSession();
 
+        var memoryStream = new MemoryStream();
+        await captchaLabel.File.OpenReadStream().CopyToAsync(memoryStream);
+
         var newCaptcha = new CaptchaModel
         {
           Name = captchaLabel.Name,
-          FileBytes = captchaLabel.File
+          FileBytes = memoryStream.ToArray()
         };
 
         await session.StoreAsync(newCaptcha);
