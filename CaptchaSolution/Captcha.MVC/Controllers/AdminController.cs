@@ -1,4 +1,5 @@
-﻿using Captcha.MVC.Service;
+﻿using System;
+using Captcha.MVC.Service;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,15 +31,13 @@ namespace Captcha.MVC.Controllers
     {
       try
       {
-        if (ModelState.IsValid)
-        {
-          await _captchaService.PostCaptcha(label);
-          return RedirectToAction("Index" , "Home");
-        }
+        await _captchaService.PostCaptcha(label);
+
+        return RedirectToAction("Index" , "Home");
       }
-      catch
+      catch(Exception e)
       {
-        _logger.LogError("Der gik et eller andet galt under oprettelsen");
+        _logger.LogError("{e}", e);
       }
       return RedirectToAction("Index", "Home");
     }

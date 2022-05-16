@@ -2,6 +2,8 @@
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Refit;
+
 namespace Captcha.Api.Controllers
 {
   [ApiController]
