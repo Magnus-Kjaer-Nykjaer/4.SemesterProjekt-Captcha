@@ -13,6 +13,6 @@ namespace Captcha.Shared
 
     [Required]
     [Display(Name = "File")]
-    public IFormFile File { get; set; }
+    public byte[] File { get; set; }
   }
 }

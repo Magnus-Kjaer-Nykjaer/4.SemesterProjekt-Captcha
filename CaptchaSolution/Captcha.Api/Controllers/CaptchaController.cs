@@ -28,6 +28,6 @@ namespace Captcha.Api.Controllers
     }
 
     [HttpPost(Route.PostCaptcha)]
-    public async Task PostCaptcha(string captchaName, byte[] fileBytes) => await _captchaRepository.PostCaptcha(captchaName, fileBytes);
+    public async Task PostCaptcha(CaptchaLabelDto captchaLabel) => await _captchaRepository.PostCaptcha(captchaLabel);
   }
 }

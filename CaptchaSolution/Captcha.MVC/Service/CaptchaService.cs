@@ -20,9 +20,9 @@ namespace Captcha.MVC.Service
 
     public async Task<IActionResult> PostCaptcha(CaptchaLabelDto captchaLabel)
     {
-      var gitHubApi = RestService.For<ICaptchaService>("http://localhost:48251");
-      var octocat = await gitHubApi.PostCaptcha(captchaLabel);
-      return octocat;
+      var gitHubApi = RestService.For<ICaptchaService>("http://localhost:5001");
+      var captcha = await gitHubApi.PostCaptcha(captchaLabel);
+      return captcha;
     }
   }
 }
