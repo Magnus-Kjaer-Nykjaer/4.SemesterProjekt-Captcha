@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Refit;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -14,28 +15,35 @@ namespace Captcha.MVC.Controllers
   [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Standard, Admin")]
   public class CaptchaController : Controller
   {
+    private readonly ILogger<CaptchaController> _logger;
     private readonly IAIService _aiService;
 
-    public CaptchaController(IAIService aiService)
+    public CaptchaController(IAIService aiService, ILogger<CaptchaController> logger)
     {
       _aiService = aiService;
+      _logger = logger;
     }
 
-    public async Task<IActionResult> CaptchaGuessr()
+    public ActionResult CaptchaGuessr()
     {
-      await test();
-
       return View();
     }
-    public async Task test ()
+
+    [HttpPost]
+    public async Task<ActionResult> CaptchaGuessr([FromForm] ModelInputDTO label)
     {
-      var dtoInput = new ModelInputDTO();
-      // System.IO.File.OpenRead("");
+      try
+      {
+       var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
-      // dtoInput.ImageSource = new FormFile(memoryStream, 0, memoryStream.Length, "test", "test");
-      dtoInput.Label = "test";
-
-      var test = await _aiService.PredictImage(new StreamPart(memoryStream, "test.jpg", "image/jpeg"));
+        return View("CaptchaGuessrResult", result);
+      }
+      catch (ApiException e)
+      {
+        _logger.LogError("{e}", e);
+      }
+      return RedirectToAction("Index", "Home");
     }
+    
   }
 }

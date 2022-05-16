@@ -20,12 +20,10 @@ namespace Captcha.MLImageCompare_Api.Controllers
     }
 
     [HttpPost(Route.Predict)]
-    public async Task<ModelOutputDTO> PredictImage([FromForm]IFormFile file)
+    public async Task<ModelOutputDTO> PredictImage([FromForm] ModelInputDTO inputDto)
     {
-      var memoryStream = new MemoryStream();
-      await file.CopyToAsync(memoryStream);
 
-      return await _mLImage.Predict(new ModelInputDTO() {Label = "test"}, memoryStream.ToArray());
+      return await _mLImage.Predict(inputDto);
     }
   }
 }

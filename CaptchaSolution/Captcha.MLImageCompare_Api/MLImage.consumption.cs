@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Captcha.Shared;
 using Captcha.MLImageCompare_Api.MLInterfaces;
+using Microsoft.AspNetCore.Http;
+using Refit;
 
 public class MLImage : IMLImage
 {
@@ -58,27 +60,31 @@ public class MLImage : IMLImage
   /// </summary>
   /// <param name="input">model input.</param>
   /// <returns><seealso cref=" ModelOutput"/></returns>
-  public async Task<ModelOutputDTO> Predict(ModelInputDTO input, byte[] file)
+  public async Task<ModelOutputDTO> Predict(ModelInputDTO input)
   {
     var predEngine = PredictEngine.Value;
-    return ConvertOutputToDto(predEngine.Predict(ConvertInputFromDto(input, file)));
+    return ConvertOutputToDto(predEngine.Predict(await ConvertInputFromDto(input)));
   }
   public ModelOutputDTO ConvertOutputToDto(ModelOutput modelOutput)
   {
     var output = new ModelOutputDTO();
+
     output.PredictedLabel = modelOutput.PredictedLabel;
     output.Label = modelOutput.Label;
-    output.ImageSource = modelOutput.ImageSource;
     output.Score = modelOutput.Score;
     return output;
   }
 
-  public ModelInput ConvertInputFromDto(ModelInputDTO dto, byte[] file)
+  public async Task<ModelInput> ConvertInputFromDto(ModelInputDTO dto)
   {
-    var input = new ModelInput();
-    input.Label = dto.Label;
-    input.ImageSource = file;
-    return input;
+    var memoryStream = new MemoryStream();
+    await dto.File.OpenReadStream().CopyToAsync(memoryStream);
+    var modelInput = new ModelInput()
+    {
+      Label = dto.Name,
+      ImageSource = memoryStream.ToArray()
+    };
+    return modelInput;
   }
 
   private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()

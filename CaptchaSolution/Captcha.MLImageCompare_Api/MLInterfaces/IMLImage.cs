@@ -5,6 +5,6 @@ namespace Captcha.MLImageCompare_Api.MLInterfaces
 {
   public interface IMLImage
   {
-    Task<ModelOutputDTO> Predict(ModelInputDTO input, byte[] file);
+    Task<ModelOutputDTO> Predict(ModelInputDTO input);
   }
 }

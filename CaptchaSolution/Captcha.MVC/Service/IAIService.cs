@@ -10,6 +10,6 @@ namespace Captcha.MVC.Service
   {
     [Multipart]
     [Post(Route.Predict)]
-    Task<ModelOutputDTO> PredictImage([AliasAs("file")]StreamPart content);
+    Task<ModelOutputDTO> PredictImage(string name, [AliasAs(nameof(ModelInputDTO.File))] StreamPart file);
   }
 }
