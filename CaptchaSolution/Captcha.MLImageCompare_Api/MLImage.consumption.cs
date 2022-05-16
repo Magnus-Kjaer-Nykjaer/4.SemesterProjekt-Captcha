@@ -58,10 +58,10 @@ public class MLImage : IMLImage
   /// </summary>
   /// <param name="input">model input.</param>
   /// <returns><seealso cref=" ModelOutput"/></returns>
-  public async Task<ModelOutputDTO> Predict(ModelInputDTO input)
+  public async Task<ModelOutputDTO> Predict(ModelInputDTO input, byte[] file)
   {
     var predEngine = PredictEngine.Value;
-    return ConvertOutputToDto(predEngine.Predict(ConvertInputFromDto(input)));
+    return ConvertOutputToDto(predEngine.Predict(ConvertInputFromDto(input, file)));
   }
   public ModelOutputDTO ConvertOutputToDto(ModelOutput modelOutput)
   {
@@ -73,11 +73,11 @@ public class MLImage : IMLImage
     return output;
   }
 
-  public ModelInput ConvertInputFromDto(ModelInputDTO dto)
+  public ModelInput ConvertInputFromDto(ModelInputDTO dto, byte[] file)
   {
     var input = new ModelInput();
     input.Label = dto.Label;
-    input.ImageSource = dto.ImageSource;
+    input.ImageSource = file;
     return input;
   }
 
