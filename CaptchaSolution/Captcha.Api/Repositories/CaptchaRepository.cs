@@ -37,6 +37,7 @@ namespace Captcha.Api.Repositories
       await session.SaveChangesAsync();
       await Task.CompletedTask;
     }
+
     public async Task PostCaptcha(CaptchaLabelDto captchaLabel) // Opret medarbejder 
     {
       try
