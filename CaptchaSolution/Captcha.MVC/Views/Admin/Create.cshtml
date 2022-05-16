@@ -9,7 +9,7 @@
 
 <div>
   <form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="File" accept="image/png, image/jpeg, image/jpg"/>
+    <input type="file" asp-for="File" onchange="loadFile(event)" accept="image/png, image/jpeg, image/jpg"/>
 
     <br/><br/>
     <img src="" alt="CaptchaImage" id="preview"/>
@@ -23,7 +23,7 @@
   </form>
 </div>
 
-@*<script>
+<script>
 
   var loadFile = function(event) {
     var output = document.getElementById('preview');
@@ -32,4 +32,4 @@
       URL.revokeObjectURL(output.src);
     }
   };
-</script>*@
+</script>

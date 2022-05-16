@@ -1,10 +1,9 @@
-﻿using System;
-using Captcha.MVC.Service;
+﻿using Captcha.MVC.Service;
 using Captcha.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using Refit;
+using System.Threading.Tasks;
 
 namespace Captcha.MVC.Controllers
 {
@@ -25,17 +24,16 @@ namespace Captcha.MVC.Controllers
       return View();
     }
 
-
     [HttpPost]
-    public async Task<ActionResult> Create([FromForm]CaptchaLabelDto label)
+    public async Task<ActionResult> Create([FromForm] CaptchaLabelDto label)
     {
       try
       {
         await _captchaService.PostCaptcha(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
-        return RedirectToAction("Index" , "Home");
+        return RedirectToAction("Index", "Home");
       }
-      catch(ApiException e)
+      catch (ApiException e)
       {
         _logger.LogError("{e}", e);
       }
