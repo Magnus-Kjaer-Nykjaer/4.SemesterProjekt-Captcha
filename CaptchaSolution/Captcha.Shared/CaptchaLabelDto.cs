@@ -7,12 +7,11 @@ namespace Captcha.Shared
   public class CaptchaLabelDto
   {
     [Required]
-    public uint Label { get; set; }
+    [Display(Name = "FileName")]
+    public string Name { get; set; }
 
     [Required]
-    public string PredictedLabel { get; set; }
-
-    [Required]
-    public float Score { get; set; }
+    [Display(Name = "File")]
+    public IFormFile File { get; set; }
   }
 }

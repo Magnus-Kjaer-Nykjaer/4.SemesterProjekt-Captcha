@@ -30,6 +30,10 @@ namespace Captcha.Api.Controllers
 
     [HttpPost(Route.PostCaptcha)]
     public async Task PostCaptcha([FromForm] CaptchaLabelDto captchaLabel) => 
-      await _captchaRepository.PostCaptcha(captchaLabel);
+      await _captchaRepository.PostCaptcha(captchaLabel); 
+    
+    [HttpPost(Route.PostCaptchaResult)]
+    public async Task PostCaptchaResult([FromBody] ModelOutputDTO captchaResult) => 
+      await _captchaRepository.PostCaptchaResult(captchaResult);
   }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
-using Captcha.Shared;
+﻿using Captcha.Shared;
+using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Captcha.Api.Repositories
 {
@@ -19,12 +17,12 @@ namespace Captcha.Api.Repositories
       _logger = logger;
     }
 
-    public Task<CaptchaLabelDto> GetASelectedCaptcha(string captchaName)
+    public async Task<CaptchaLabelDto> GetASelectedCaptcha(string captchaName)
     {
       using var documentStore = CreateStore();
-      using var session = documentStore.OpenSession();
-      var captcha = session.Load<CaptchaLabelDto>(captchaName);
-      return Task.FromResult(captcha);
+      using var session = documentStore.OpenAsyncSession();
+      var captcha = await session.LoadAsync<CaptchaLabelDto>(captchaName);
+      return captcha;
     }
 
     public async Task UpdateCaptchaName(string captchaName, string change)
@@ -42,20 +40,49 @@ namespace Captcha.Api.Repositories
     {
       try
       {
-        var documentStore = CreateStore();
-        var session = documentStore.OpenAsyncSession();
-
-        var memoryStream = new MemoryStream();
-        await captchaLabel.File.OpenReadStream().CopyToAsync(memoryStream);
-
-        var newCaptcha = new CaptchaModel
+        using (var documentStore = CreateStore())
         {
-          Name = captchaLabel.Name,
-          FileBytes = memoryStream.ToArray()
-        };
+          using (var session = documentStore.OpenAsyncSession())
+          {
 
-        await session.StoreAsync(newCaptcha);
-        await session.SaveChangesAsync();
+            var memoryStream = new MemoryStream();
+            await captchaLabel.File.OpenReadStream().CopyToAsync(memoryStream);
+
+            var newCaptcha = new CaptchaModel
+            {
+              Name = captchaLabel.Name,
+              FileBytes = memoryStream.ToArray()
+            };
+
+            await session.StoreAsync(newCaptcha);
+            await session.SaveChangesAsync();
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        _logger.LogError("{e}", e);
+      }
+    }
+    public async Task PostCaptchaResult(ModelOutputDTO captchaResult) // Opret medarbejder 
+    {
+      try
+      {
+        using (var documentStore = CreateStore())
+        {
+          using (var session = documentStore.OpenAsyncSession())
+          {
+            var newCaptchaResult = new CaptchaModelResult
+            {
+              Label = captchaResult.Label,
+              PredictedLabel = captchaResult.PredictedLabel,
+              Score = captchaResult.Score
+            };
+
+            await session.StoreAsync(newCaptchaResult);
+            await session.SaveChangesAsync();
+          }
+        }
       }
       catch (Exception e)
       {

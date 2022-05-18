@@ -15,6 +15,9 @@ namespace Captcha.MVC.Service
 
     [Multipart]
     [Post(Route.PostCaptcha)]
-    Task PostCaptcha(string name, [AliasAs(nameof(CaptchaLabelDto.File))] StreamPart file);
+    Task PostCaptcha(string name, [AliasAs(nameof(CaptchaLabelDto.File))] StreamPart file);    
+    
+    [Post(Route.PostCaptchaResult)]
+    Task PostCaptchaResult(ModelOutputDTO captchaResult);
   }
 }

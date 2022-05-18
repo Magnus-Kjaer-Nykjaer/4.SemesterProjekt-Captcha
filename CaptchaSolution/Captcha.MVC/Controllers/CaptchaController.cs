@@ -14,11 +14,13 @@ namespace Captcha.MVC.Controllers
   {
     private readonly ILogger<CaptchaController> _logger;
     private readonly IAIService _aiService;
+    private readonly ICaptchaService _captchaService;
 
-    public CaptchaController(IAIService aiService, ILogger<CaptchaController> logger)
+    public CaptchaController(IAIService aiService, ILogger<CaptchaController> logger, ICaptchaService captchaService)
     {
       _aiService = aiService;
       _logger = logger;
+      _captchaService = captchaService;
     }
 
     public ActionResult CaptchaGuessr()
@@ -31,13 +33,14 @@ namespace Captcha.MVC.Controllers
     {
       try
       {
-        var result = await _aiService.PredictImage(label.Name, new StreamPart(label.File.OpenReadStream(), label.File.FileName));
+        var result = await _aiService.PredictImage("Guess", new StreamPart(label.File.OpenReadStream(), label.File.FileName));
 
+        await _captchaService.PostCaptchaResult(result);
 
         result.Score *= 100;
         return View("CaptchaGuessrResult", result);
       }
-      catch (HttpRequestException e)
+      catch (Exception e)
       {
         _logger.LogError("{e}", e);
       }

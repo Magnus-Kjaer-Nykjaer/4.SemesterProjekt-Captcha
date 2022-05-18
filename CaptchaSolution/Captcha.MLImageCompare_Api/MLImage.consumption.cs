@@ -5,11 +5,14 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using Captcha.Shared;
 using Captcha.MLImageCompare_Api.MLInterfaces;
 using Microsoft.AspNetCore.Http;
 using Refit;
+using static System.Decimal;
+using static System.Double;
 
 public class MLImage : IMLImage
 {
@@ -86,15 +89,18 @@ public class MLImage : IMLImage
     output.Label = modelOutput.Label;
 
     var score = modelOutput.Score;
-    float chosenScore = score[0];
+
+    var chosenScore = ToDecimal(score[0]);
+
     foreach (var s in score)
     {
-      if (s < 1 && s >= chosenScore)
+      var sDecimal = ToDecimal(s);
+      if (sDecimal < 1 && sDecimal >= chosenScore)
       {
-        chosenScore = s;
+        chosenScore = sDecimal;
       }
     }
-
+    
     output.Score = chosenScore;
     return output;
   }
@@ -104,6 +110,14 @@ public class MLImage : IMLImage
     var mlContext = new MLContext();
     ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var _);
     return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+  }
+
+  private decimal ToDecimal(float f)
+  {
+    return Decimal.Parse(
+      f.ToString(CultureInfo.InvariantCulture),
+      NumberStyles.Float | NumberStyles.AllowExponent,
+      CultureInfo.InvariantCulture);
   }
 }
 
