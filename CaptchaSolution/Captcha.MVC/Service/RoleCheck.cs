@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Captcha.MVC.Models
+namespace Captcha.MVC.Service
 {
   public class RoleCheck
   {

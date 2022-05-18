@@ -1,4 +1,5 @@
 using Captcha.MVC.Data;
+using Captcha.MVC.Models;
 using Captcha.MVC.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,8 @@ namespace Captcha.MVC
         .AddDefaultTokenProviders();
 
       services.AddControllersWithViews();
+
+      services.AddTransient<RoleCheck>();
 
       services.AddSingleton<ICaptchaService>(RestService.For<ICaptchaService>("http://localhost:48251"));
       services.AddSingleton<IAIService>(RestService.For<IAIService>("https://localhost:58461"));
