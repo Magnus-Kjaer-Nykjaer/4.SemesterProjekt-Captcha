@@ -39,5 +39,10 @@ namespace Captcha.MVC.Controllers
       }
       return RedirectToAction("Index", "Home");
     }
+
+    public ActionResult AdminStatistic()
+    {
+      return View();
+    }
   }
 }
