@@ -87,6 +87,7 @@ public class MLImage : IMLImage
 
     output.PredictedLabel = modelOutput.PredictedLabel;
     output.Label = modelOutput.Label;
+    output.Timestamp = DateTime.Now;
 
     var score = modelOutput.Score;
 

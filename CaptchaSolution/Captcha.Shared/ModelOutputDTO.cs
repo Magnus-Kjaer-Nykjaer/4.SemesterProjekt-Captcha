@@ -21,5 +21,9 @@ namespace Captcha.Shared
     [Required]
     [Display(Name = "Score")]
     public decimal Score { get; set; }
+
+    [Required]
+    [Display(Name = "Timestamp")]
+    public DateTime Timestamp { get; set; }
   }
 }

@@ -13,5 +13,6 @@ namespace Captcha.Shared
     public uint Label { get; set; }
     public string PredictedLabel { get; set; }
     public decimal Score { get; set; }
+    public DateTime Timestamp { get; set; }
   }
 }

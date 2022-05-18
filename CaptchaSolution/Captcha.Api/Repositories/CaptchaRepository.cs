@@ -76,7 +76,8 @@ namespace Captcha.Api.Repositories
             {
               Label = captchaResult.Label,
               PredictedLabel = captchaResult.PredictedLabel,
-              Score = captchaResult.Score
+              Score = captchaResult.Score,
+              Timestamp = captchaResult.Timestamp
             };
 
             await session.StoreAsync(newCaptchaResult);
