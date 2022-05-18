@@ -27,7 +27,7 @@ namespace Captcha.Api.Repositories
       return Task.FromResult(captcha);
     }
 
-    public async Task UpdateCaptchaName(string captchaName, string change) // ændre navn og begræns output
+    public async Task UpdateCaptchaName(string captchaName, string change)
     {
       using var documentStore = CreateStore();
       using var session = documentStore.OpenAsyncSession();
@@ -38,7 +38,7 @@ namespace Captcha.Api.Repositories
       await Task.CompletedTask;
     }
 
-    public async Task PostCaptcha(CaptchaLabelDto captchaLabel) // Opret medarbejder 
+    public async Task PostCaptcha(CaptchaLabelDto captchaLabel)
     {
       try
       {
@@ -77,7 +77,7 @@ namespace Captcha.Api.Repositories
                     UseOptimisticConcurrency = true
                 },
         // Define a default database (optional)
-        Database = "CaptchaReader",
+        Database = "captcha",
       }.Initialize();
 
       return store;
